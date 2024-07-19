@@ -6,41 +6,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'product_list.css' %}">
 </head>
 <body>
-    <div class="container">
-        <div class="product-section">
-            <h1>Available Products</h1>
-            <form method="post" action="{% url 'selected_products' %}">
-                {% csrf_token %}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Select</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for product in products %}
-                            <tr>
-                                <td>{{ product.name }}</td>
-                                <td>{{ product.quantity }}</td>
-                                <td>{{ product.amount }}</td>
-                                <td><input type="checkbox" name="product_ids" value="{{ product.id }}"></td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="4">No products available.</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <button type="submit">View Selected Products</button>
-            </form>
+    <div class="header">
+        <div class="left">
+            <img src="{% static 'images/icon.jpeg' %}" alt="Logo">
         </div>
+        <div class="middle">
+            <input class="search-box" type="text" placeholder="Search...">
+        </div>
+        <div class="right">
+            <button>Log out</button>
+            <button>Buy/sell</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="ad">
+            <img src="{% static 'images/icon.jpeg' %}" alt="Banner">
+        </div>
+
+        <form method="post" action="{% url 'selected_products' %}">
+            {% csrf_token %}
+            <button class="checkoutBtn" type="submit">Check Out</button>
+            <div class="products">
+                {% for product in products %}
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </div>
+                    <div class="card-info">
+                        <p class="text-title">{{ product.name }}</p>
+                        <p class="text-body">Quantity: {{ product.quantity }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-title">₹ {{ product.amount }}</span>
+                        <div class="card-button">
+                            <input type="checkbox" name="product_ids" value="{{ product.id }}">
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No products available.</p>
+                {% endfor %}
+            </div>
+        </form>
     </div>
 </body>
 </html>

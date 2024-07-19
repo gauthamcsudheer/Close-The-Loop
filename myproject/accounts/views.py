@@ -3,6 +3,7 @@ from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, ProductForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 from .models import Product
 
 def sign_up(request):
@@ -47,16 +48,14 @@ def product_list(request):
     return render(request, 'accounts/product_list.html', {'products': products})
 
 def selected_products(request):
-    # Get selected product IDs from the POST request
-    selected_ids = request.POST.getlist('product_ids')
-    
-    # Fetch the selected products from the database
-    products = Product.objects.filter(id__in=selected_ids)
-    
-    # Calculate the total amount
-    total_amount = sum(product.amount for product in products)
-    
-    return render(request, 'accounts/selected_products.html', {
-        'products': products,
-        'total_amount': total_amount
-    })
+    if request.method == 'POST':
+        selected_ids = request.POST.getlist('product_ids')
+        products = Product.objects.filter(id__in=selected_ids)
+        total_amount = sum(product.amount for product in products)
+        
+        return render(request, 'accounts/checkout.html', {
+            'products': products,
+            'total_amount': total_amount,
+        })
+    else:
+        return redirect('product_list')

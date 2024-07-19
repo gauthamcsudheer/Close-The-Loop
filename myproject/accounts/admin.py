@@ -7,6 +7,6 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'quantity', 'company_name', 'location', 'user')
+    list_display = ('name', 'quantity', 'amount', 'company_name', 'location', 'user', 'image')
     search_fields = ('name', 'company_name', 'location')
     list_filter = ('company_name', 'location')
