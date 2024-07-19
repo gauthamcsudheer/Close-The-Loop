@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Products</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="product-section">
+            <h1>Selected Products</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Company Name</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.company_name }}</td>
+                            <td>{{ product.location }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No products selected.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if products %}
+                <div class="total-amount">
+                    <h2>Total Amount: {{ total_amount }}</h2>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

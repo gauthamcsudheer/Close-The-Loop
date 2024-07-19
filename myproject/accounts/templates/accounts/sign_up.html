@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="login-section">
+            <h1>Sign Up</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="username">
+                        <img src="{% static 'images/user.jpeg' %}" alt="User Icon">
+                        {{ form.username }}
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label for="email">
+                        {{ form.email }}
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label for="company_name">
+                        {{ form.company_name }}
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label for="location">
+                        {{ form.location }}
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label for="password1">
+                        <img src="{% static 'images/lock.png' %}" alt="Lock Icon">
+                        {{ form.password1 }}
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label for="password2">
+                        <img src="{% static 'images/lock.png' %}" alt="Lock Icon">
+                        {{ form.password2 }}
+                    </label>
+                </div>
+                <button type="submit">Sign Up Now</button>
+            </form>
+            <p class="switch-page">Already have an account? <a href="{% url 'log_in' %}">Login</a></p>
+        </div>
+        <div class="image-section">
+            <img class="image-section-img" src="{% static 'images/logo.png' %}" alt="Sign Up Image">
+        </div>
+    </div>
+</body>
+</html>

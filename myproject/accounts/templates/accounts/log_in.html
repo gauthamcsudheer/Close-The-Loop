@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="login-section">
+            <h1>Login</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="username">
+                        <img src="{% static 'images/user.jpeg' %}" alt="User Icon">
+                        {{ form.username }}
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label for="password">
+                        <img src="{% static 'images/lock.png' %}" alt="Lock Icon">
+                        {{ form.password }}
+                    </label>
+                </div>
+                <button type="submit">Login Now</button>
+            </form>
+            <p class="switch-page">Don't have an account? <a href="{% url 'sign_up' %}">Sign Up</a></p>
+        </div>
+        <div class="image-section">
+            <img class="image-section-img" src="{% static 'images/logo.png' %}" alt="Woman with Tablet">
+        </div>
+    </div>
+</body>
+</html>
