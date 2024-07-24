@@ -56,7 +56,7 @@ class LoginForm(AuthenticationForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'quantity', 'amount', 'image']  # Include 'image' field
+        fields = ['image', 'name', 'quantity', 'amount']  # Include 'image' field
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
