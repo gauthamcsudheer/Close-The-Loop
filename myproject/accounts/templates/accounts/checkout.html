@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'checkout.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="left">
+            <img src="{% static 'images/icon.jpeg' %}" alt="Logo">
+        </div>
+        <div class="middle">
+            <h1>Checkout</h1>
+        </div>
+        <div class="right">
+            <button onclick="window.history.back()">Back</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Selected Products</h2>
+        <div class="products">
+            {% for product in products %}
+            <div class="card">
+                <div class="card-img">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                </div>
+                <div class="card-info">
+                    <p class="text-title">{{ product.name }}</p>
+                    <p class="text-body">Quantity: {{ product.quantity }}</p>
+                    <span class="text-title">₹ {{ product.amount }}</span>
+                </div>
+            </div>
+            {% empty %}
+            <p>No products selected.</p>
+            {% endfor %}
+        </div>
+        <h3>Total Amount: ₹ {{ total_amount }}</h3>
+    </div>
+</body>
+</html>
